@@ -1,7 +1,7 @@
 <template>
     <div id="add-blog">
         <h2>Add a new post</h2>
-		<form>
+		<form v-if="!submitted">
 			<label>Blog title:</label>
 			<input type="text" v-model="blog.title" required />
 			<label>Blog content:</label>
@@ -18,7 +18,12 @@
 			<select v-model="blog.author">
 				<option v-for="author in authors">{{ author }}</option>
 			</select>
+			<hr />
+			<button v-on:click.prevent="post">Add Blog</button>
 		</form>
+		<div v-if="submitted">
+			<h3>Your post has been submitted</h3>
+		</div>
 		<div id="preview">
 			<h3>Preview post</h3>
 			<p>Title: {{ blog.title }}</p>
@@ -48,11 +53,17 @@ export default {
 			authors: [
 				"JK Gunnink",
 				"Guest"
-			]
+			],
+			submitted: false,
         }
     },
     methods: {
-
+		post: function(){
+			this.$http.post('https://jksvueblog.firebaseio.com/posts.json', this.blog).then(function(data){
+				console.log(data)
+				this.submitted = true
+			})
+		}
     }
 }
 </script>
