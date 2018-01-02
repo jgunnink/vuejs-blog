@@ -1,10 +1,9 @@
 <template>
     <div id="show-blogs">
-        <h1>All Blog Articles</h1>
+        <h1>List Blog Articles</h1>
         <input type="text" v-model="search" placeholder="search blogs" />
         <div v-for="blog in filteredBlogs" class="single-blog">
             <h2 v-rainbow>{{ blog.title | to-uppercase }}</h2>
-            <article>{{ blog.body }}</article>
         </div>
     </div>
 </template>
@@ -27,7 +26,6 @@ export default {
         });
     },
     computed: {
-        
 	},
 	filters: {
 		toUppercase(str){

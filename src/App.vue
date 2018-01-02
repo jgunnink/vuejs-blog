@@ -1,17 +1,18 @@
 <template>
     <div>
-        <!-- <add-blog /> -->
-		<show-blogs />
+		<router-view />
     </div>
 </template>
 
 <script>
-// import addBlog from './components/addBlog.vue'
+import addBlog from './components/addBlog.vue'
+import listBlogs from './components/listBlogs.vue'
 import showBlogs from './components/showBlogs.vue'
 
 export default {
 	components: {
-		// 'add-blog': addBlog
+		'add-blog': addBlog,
+		'list-blogs': listBlogs,
 		'show-blogs': showBlogs
 	},
     data () {
