@@ -1,7 +1,7 @@
 <template>
 	<div id="single-blog">
 		<h1>{{ blog.title }}</h1>
-		<article>{{ blog.body }}</article>
+		<article>{{ blog.content }}</article>
 		<br />
 		<router-link to="/"><p>Home</p></router-link>
 	</div>
@@ -9,24 +9,28 @@
 
 <script>
 export default {
-	data() {
-		return {
-			id: this.$route.params.id,
-			blog: {}
-		}
-	},
-	created() {
-		this.$http.get(`http://jsonplaceholder.typicode.com/posts/${this.id}`).then(function(res){
-			console.log(res)
-			this.blog = res.body
-	  })
+  data() {
+    return {
+      id: this.$route.params.id,
+      blog: {}
+    }
+  },
+  created() {
+    this.$http
+      .get(`https://jksvueblog.firebaseio.com/posts/${this.id}.json`)
+      .then(function(res) {
+        return res.json()
+      })
+      .then(function(res) {
+        this.blog = res
+      })
   }
 }
 </script>
 
 <style>
 #single-blog {
-	max-width: 960px;
-	margin: 0 auto;
+  max-width: 960px;
+  margin: 0 auto;
 }
 </style>
